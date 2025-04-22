@@ -1,4 +1,4 @@
-# RULE-
+# RULE EXCLUDE App
 
 このプロジェクトは、RULE EXCLUDEというシンプルなゲームです。
 

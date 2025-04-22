@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <title>RULE EXCLUDE</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>RULE EXCLUDE</h1>
+
+        <div id="start-screen">
+            <button id="start-button">ゲームスタート</button>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div id="timer">経過時間   <span id="time">00:00</div>
+            <div id="question-area">
+                <!-- 問題はJavaScriptで動的に生成されるため、ここでは空 -->
+            </div>
+            <!-- 全体解答ボタンを削除 -->
+        </div>
+
+        <div id="transition-screen" class="hidden">
+            <p id="transition-message"></p>
+            <button id="next-set-button">次へ</button>
+        </div>
+
+        <div id="clear-screen" class="hidden">
+            <h2>クリア！</h2>
+            <p id="clear-message">おめでとうございます！全問正解です！</p>
+            <p id="clear-time">クリアタイム  <span id="time-result"></p>
+            <button id="tweet-button">Xでシェア</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

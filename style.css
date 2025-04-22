@@ -1,0 +1,157 @@
+body {
+    font-family: sans-serif; /* フォントを sans-serif に変更 */
+    font-size: 1.2em; /* フォントサイズを 1.2em に変更 */
+    background-color: #382c5c;
+    color: #ecf0f1;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: rgba(44, 62, 80, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    border: 3px solid #f50505;
+    box-shadow: 0 0 20px rgba(219, 80, 52, 0.5);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#timer {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    color: #ffffff;
+}
+
+#question-area {
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+    gap: 15px; /* 質問の間隔 */
+    margin-bottom: 20px;
+}
+
+.question {
+    padding: 15px;
+    border: 2px solid #f50505;
+    border-radius: 5px;
+    text-align: left; /* テキストを左寄せ */
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.question img {
+    max-width: 100%; /* 画像が親要素からはみ出さないように */
+    height: auto;
+    display: block; /* インライン要素の回り込みを解消 */
+    margin-bottom: 10px; /* 画像と入力欄の間隔 */
+}
+
+.answer-input {
+    width: calc(100% - 20px); /* 左右のpaddingを考慮して幅を調整 */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* padding, border を含めて width, height に */
+}
+
+#answer-button,
+#start-button,
+#tweet-button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    background-color: #2ecc71;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#start-button:hover, #tweet-button:hover {
+    background-color: #27ae60;
+    transform: scale(1.1);
+}
+
+#clear-screen h2 {
+    color: green;
+}
+
+#clear-message {
+    margin-bottom: 20px;
+}
+
+.answer-button-single {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    background-color: #e74c3c;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px; /* 入力欄との間隔 */
+    transition: all 0.3s ease;
+}
+
+.answer-button-single:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+/* transition-screen のスタイル */
+#transition-screen {
+    position: fixed; /* 画面全体を覆うように固定 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* 半透明の背景 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2em;
+    padding: 20px;
+    text-align: center;
+    z-index: 10; /* 他の要素より前面に表示 */
+}
+
+#transition-message {
+    margin-bottom: 30px;
+    white-space: pre-line;
+}
+
+#next-set-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+#next-set-button:hover {
+    background-color: #0056b3;
+}
