@@ -71,73 +71,73 @@ const questions = [
     {
         count: 3, // Ａ
         data: [
-            { image: 'a1.jpg', answer: ['おんせん','温泉'], hint: 'a1hint.jpg', hint2: 'a-1hint2.jpg' },
-            { image: 'a2.jpg', answer: ['きーぱー'], hint: 'a2hint.jpg', hint2: 'q4-2hint2.jpg' },
-            { image: 'a3.jpg', answer: ['しげん','資源'], hint: 'a3hint.jpg', hint2: 'q4-3hint2.jpg' }
+            { image: 'a1.JPG', answer: ['おんせん','温泉'], hint: 'a1hint.JPG', hint2: 'a-1hint2.JPG' },
+            { image: 'a2.JPG', answer: ['きーぱー'], hint: 'a2hint.JPG', hint2: 'q4-2hint2.JPG' },
+            { image: 'a3.JPG', answer: ['しげん','資源'], hint: 'a3hint.JPG', hint2: 'q4-3hint2.JPG' }
         ],
-        hintDelay: 240,      // 第1段階ヒントまで 5秒
+        hintDelay: 240,
         isLastSet: false
     },
     {
         count: 3, // Ｂ
         data: [
-            { image: 'b1.jpg', answer: ['サイト','site'], hint: 'b1hint.jpg' },
-            { image: 'b2.jpg', answer: ['ねじれ'], hint: 'b2hint.jpg' },
-            { image: 'b3.jpg', answer: ['湯水','ゆみず'], hint: 'b3hint.jpg' }
+            { image: 'b1.JPG', answer: ['サイト','site'], hint: 'b1hint.JPG' },
+            { image: 'b2.JPG', answer: ['ねじれ'], hint: 'b2hint.JPG' },
+            { image: 'b3.JPG', answer: ['湯水','ゆみず'], hint: 'b3hint.JPG' }
         ],
         isLastSet: false
     },
     {
         count: 3, // Ｃ
         data: [
-            { image: 'c1.jpg', answer: ['猫','ねこ','cat'], hint: 'c1hint.jpg' },
-            { image: 'c2.jpg', answer: ['わいん','wine'], hint: 'c2hint.jpg' },
-            { image: 'c3.jpg', answer: ['えーる','yell'], hint: 'c3hint.jpg' }
+            { image: 'c1.JPG', answer: ['猫','ねこ','cat'], hint: 'c1hint.JPG' },
+            { image: 'c2.JPG', answer: ['わいん','wine'], hint: 'c2hint.JPG' },
+            { image: 'c3.JPG', answer: ['えーる','yell'], hint: 'c3hint.JPG' }
         ],
         isLastSet: false
     },
     {
         count: 3, // Ｄ
         data: [
-            { image: 'd1.jpg', answer: ['空','そら'], hint: 'd1hint.jpg' },
-            { image: 'd2.jpg', answer: ['ろっく','lock'], hint: 'd2hint.jpg' },
-            { image: 'd3.jpg', answer: ['しきゅうしき','始球式'], hint: 'd3hint.jpg' }
+            { image: 'd1.JPG', answer: ['空','そら'], hint: 'd1hint.JPG' },
+            { image: 'd2.JPG', answer: ['ろっく','lock'], hint: 'd2hint.JPG' },
+            { image: 'd3.JPG', answer: ['しきゅうしき','始球式'], hint: 'd3hint.JPG' }
         ],
         isLastSet: false
     },
     {
         count: 3, // Ｅ
         data: [
-            { image: 'e1.jpg', answer: ['あいきどう','合気道'], hint: 'e1hint.jpg' },
-            { image: 'e2.jpg', answer: ['onion','オニオン'], hint: 'e2hint.jpg' },
-            { image: 'e3.jpg', answer: ['あーす','earth'], hint: 'e3hint.jpg' }
+            { image: 'e1.JPG', answer: ['あいきどう','合気道'], hint: 'e1hint.JPG' },
+            { image: 'e2.JPG', answer: ['onion','オニオン'], hint: 'e2hint.JPG' },
+            { image: 'e3.JPG', answer: ['あーす','earth'], hint: 'e3hint.JPG' }
         ],
         isLastSet: false
     },
     {
         count: 3, // Ｆ
         data: [
-            { image: 'f1.jpg', answer: ['帽子','ぼうし'], hint: 'f1hint.jpg' },
-            { image: 'f2.jpg', answer: ['給料日','きゅうりょうび'], hint: 'f2hint.jpg' },
-            { image: 'f3.jpg', answer: ['いぬ','犬'], hint: 'f3hint.jpg' }
+            { image: 'f1.JPG', answer: ['帽子','ぼうし'], hint: 'f1hint.JPG' },
+            { image: 'f2.JPG', answer: ['給料日','きゅうりょうび'], hint: 'f2hint.JPG' },
+            { image: 'f3.JPG', answer: ['いぬ','犬'], hint: 'f3hint.JPG' }
         ],
          isLastSet: false
     },
     {
         count: 3, // Ｇ
         data: [
-            { image: 'g1.jpg', answer: ['くつ','靴'], hint: 'g1hint.jpg' },
-            { image: 'g2.jpg', answer: ['霊媒師','れいばいし'], hint: 'g2hint.jpg' },
-            { image: 'g3.jpg', answer: ['くじ'], hint: 'g3hint.jpg' }
+            { image: 'g1.JPG', answer: ['くつ','靴'], hint: 'g1hint.JPG' },
+            { image: 'g2.JPG', answer: ['霊媒師','れいばいし'], hint: 'g2hint.JPG' },
+            { image: 'g3.JPG', answer: ['くじ'], hint: 'g3hint.JPG' }
         ],
         isLastSet: false
     },
     {
         count: 3, // Ｈ
         data: [
-            { image: 'h1.jpg', answer: ['wink','ういんく'], hint: 'h1hint.jpg' },
-            { image: 'h2.jpg', answer: ['いわて','岩手','岩手県','いわてけん'], hint: 'h2hint.jpg' },
-            { image: 'h3.jpg', answer: ['しわ'], hint: 'h3hint.jpg' }
+            { image: 'h1.JPG', answer: ['wink','ういんく'], hint: 'h1hint.JPG' },
+            { image: 'h2.JPG', answer: ['いわて','岩手','岩手県','いわてけん'], hint: 'h2hint.JPG' },
+            { image: 'h3.JPG', answer: ['しわ'], hint: 'h3hint.JPG' }
         ],
         transitionMessage: "追加のルール用紙を見てルールを確認してください \n 確認できれば下のボタンをおしてください",
         isLastSet: false
@@ -145,23 +145,22 @@ const questions = [
     {
         count: 4, // 中謎（そのまま）
         data: [
-            { image: 'm1.jpg', answer: ['餌','えさ'], hint: 'm1hint.jpg' },
-            { image: 'm2.jpg', answer: ['目黒','めぐろ'], hint: 'm2hint.jpg' },
-            { image: 'm3.jpg', answer: ['おんらいん'], hint: 'm3hint.jpg' },
-            { image: 'm4.jpg', answer: ['all','おーる'], hint: 'm4hint.jpg' }
+            { image: 'm1.JPG', answer: ['餌','えさ'], hint: 'm1hint.JPG' },
+            { image: 'm2.JPG', answer: ['目黒','めぐろ'], hint: 'm2hint.JPG' },
+            { image: 'm3.JPG', answer: ['おんらいん'], hint: 'm3hint.JPG' },
+            { image: 'm4.JPG', answer: ['all','おーる'], hint: 'm4hint.JPG' }
         ],
-        hintDelay: 420,      // 第1段階ヒントまで 7分
+        hintDelay: 420,
         isLastSet: false
     },
     {
         count: 1, // ラス謎（そのまま）
         data: [
-            { image: 'last.jpg', answer: ['ばーど','bird'], hint: 'lasthint.jpg', hint2: 'lasthint2.jpg' }
+            { image: 'last.JPG', answer: ['ばーど','bird'], hint: 'lasthint.JPG', hint2: 'lasthint2.JPG' }
         ],
         hintDelay: 300,
-        hintDelay2: 600, // 第2段階ヒントまで 10分
+        hintDelay2: 600,
         isLastSet: true
-        
     }
 ];
 
