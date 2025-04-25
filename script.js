@@ -63,19 +63,21 @@ function normalizeAnswer(answer) {
 
 
 // デフォルトのヒント表示までの時間 (秒)
-const timeForHint1 = 240; 
-const timeForHint2 = 100000;//最初からの時間（ヒント１からではない）
+const timeForHint1 = 2; 
+const timeForHint2 = 5;//最初からの時間（ヒント１からではない）
 
 // 問題データ (画像ファイル名と答えとヒント)
 const questions = [
     {
         count: 3, // Ａ
         data: [
-            { image: 'a1.JPG', answer: ['おんせん','温泉'], hint: 'a1hint.JPG', hint2: 'a-1hint2.JPG' },
-            { image: 'a2.JPG', answer: ['きーぱー'], hint: 'a2hint.JPG', hint2: 'q4-2hint2.JPG' },
-            { image: 'a3.JPG', answer: ['しげん','資源'], hint: 'a3hint.JPG', hint2: 'q4-3hint2.JPG' }
+            { image: 'a1.JPG', answer: ['おんせん','温泉'], hint: 'a1hint.JPG', hint2: 'unused' },
+            { image: 'a2.JPG', answer: ['きーぱー'], hint: 'a2hint.JPG', hint2: 'unused' },
+            { image: 'a3.JPG', answer: ['しげん','資源'], hint: 'a3hint.JPG', hint2: 'unused' }
         ],
-        hintDelay: 240,
+        hintDelay: 3,
+        // セット共通の第2段階ヒントテキストを追加
+        hintText: "Ａの法則：丸い形のもの",
         isLastSet: false
     },
     {
@@ -85,15 +87,17 @@ const questions = [
             { image: 'b2.JPG', answer: ['ねじれ'], hint: 'b2hint.JPG' },
             { image: 'b3.JPG', answer: ['湯水','ゆみず'], hint: 'b3hint.JPG' }
         ],
+        hintText: "Bの法則：12星座",
         isLastSet: false
     },
     {
         count: 3, // Ｃ
         data: [
-            { image: 'c1.JPG', answer: ['猫','ねこ','cat'], hint: 'c1hint.JPG' },
+            { image: 'c1.JPG', answer: ['猫','ねこ','cat','きゃっと'], hint: 'c1hint.JPG' },
             { image: 'c2.JPG', answer: ['わいん','wine'], hint: 'c2hint.JPG' },
             { image: 'c3.JPG', answer: ['えーる','yell'], hint: 'c3hint.JPG' }
         ],
+        hintText: "Cの法則：アルファベット",
         isLastSet: false
     },
     {
@@ -103,6 +107,7 @@ const questions = [
             { image: 'd2.JPG', answer: ['ろっく','lock'], hint: 'd2hint.JPG' },
             { image: 'd3.JPG', answer: ['しきゅうしき','始球式'], hint: 'd3hint.JPG' }
         ],
+        hintText: "Dの法則：人間の体の一部または全体",
         isLastSet: false
     },
     {
@@ -112,6 +117,7 @@ const questions = [
             { image: 'e2.JPG', answer: ['onion','オニオン'], hint: 'e2hint.JPG' },
             { image: 'e3.JPG', answer: ['あーす','earth'], hint: 'e3hint.JPG' }
         ],
+        hintText: "Eの法則：アイと読むもの",
         isLastSet: false
     },
     {
@@ -121,6 +127,7 @@ const questions = [
             { image: 'f2.JPG', answer: ['給料日','きゅうりょうび'], hint: 'f2hint.JPG' },
             { image: 'f3.JPG', answer: ['いぬ','犬'], hint: 'f3hint.JPG' }
         ],
+        hintText: "Fの法則：キュウと読むもの",
          isLastSet: false
     },
     {
@@ -130,6 +137,7 @@ const questions = [
             { image: 'g2.JPG', answer: ['霊媒師','れいばいし'], hint: 'g2hint.JPG' },
             { image: 'g3.JPG', answer: ['くじ'], hint: 'g3hint.JPG' }
         ],
+        hintText: "Gの法則：×の形",
         isLastSet: false
     },
     {
@@ -139,16 +147,17 @@ const questions = [
             { image: 'h2.JPG', answer: ['いわて','岩手','岩手県','いわてけん'], hint: 'h2hint.JPG' },
             { image: 'h3.JPG', answer: ['しわ'], hint: 'h3hint.JPG' }
         ],
+        hintText: "Hの法則：九九にあるもの",
         transitionMessage: "追加のルール用紙を見て\nルールを確認してください \n 確認できれば下のボタンを\n押してください",
         isLastSet: false
     },
     {
         count: 4, // 中謎（そのまま）
         data: [
-            { image: 'm1.JPG', answer: ['餌','えさ'], hint: 'm1hint.JPG' },
-            { image: 'm2.JPG', answer: ['目黒','めぐろ'], hint: 'm2hint.JPG' },
-            { image: 'm3.JPG', answer: ['おんらいん'], hint: 'm3hint.JPG' },
-            { image: 'm4.JPG', answer: ['all','おーる'], hint: 'm4hint.JPG' }
+            { image: 'm1.JPG', answer: ['餌','えさ'], hint: 'm1hint.JPG',hint2: 'm1hint2.JPG' },
+            { image: 'm2.JPG', answer: ['目黒','めぐろ'], hint: 'm2hint.JPG', hint2: 'm2hint2.JPG' },
+            { image: 'm3.JPG', answer: ['おんらいん'], hint: 'm3hint.JPG', hint2: 'm3hint3.JPG' },
+            { image: 'm4.JPG', answer: ['all','おーる'], hint: 'm4hint.JPG', hint2: 'm4hint4.JPG' }
         ],
         hintDelay: 420,
         isLastSet: false
@@ -221,6 +230,7 @@ function showHintWithAnimation(imageElement, level) {
     }, 50);
 }
 
+
 // 正解時のエフェクト
 function showCorrectEffect(inputElement) {
     inputElement.style.backgroundColor = '#2ecc71'; // 緑色で固定
@@ -245,15 +255,43 @@ function startHintTimers() {
     const currentSet = questions[currentQuestionSet];
     // 第1段階のヒント表示までの待機時間
     const delay1 = (currentSet.hintDelay !== undefined ? currentSet.hintDelay : timeForHint1) * 1000;
-    // 第2段階のヒント表示までの待機時間が設定されている場合のみ
+    // 第2段階のヒント表示までの待機時間
     const delay2 = (currentSet.hintDelay2 !== undefined ? currentSet.hintDelay2 : timeForHint2) * 1000;
+    
+    // 個別ヒント画像 (第1段階) のタイマー設定
     for (let i = 0; i < getCurrentQuestionCount(); i++) { 
         hintTimers.push(setTimeout(() => showHintWithAnimation(hintElements[i], 'first'), delay1));
-        if (delay2 !== null) {
+    }
+    
+    // セット共通の第2段階ヒントテキストが定義されていれば、そちらを表示
+    if (currentSet.hintText) {
+        hintTimers.push(setTimeout(showCommonHintText, delay2));
+    } else {
+        // 定義がなければ、従来通り各問題ごとの second ヒント処理（必要に応じて）
+        for (let i = 0; i < getCurrentQuestionCount(); i++) {
             hintTimers.push(setTimeout(() => showHintWithAnimation(hintElements[i], 'second'), delay2));
         }
     }
 }
+
+function showCommonHintText() {
+    // common-hint-text がなければ作成し、questionArea の上に配置
+    let commonHint = document.getElementById('common-hint-text');
+    if (!commonHint) {
+        commonHint = document.createElement('p');
+        commonHint.id = 'common-hint-text';
+        commonHint.style.opacity = '0';
+        commonHint.style.transition = 'opacity 0.5s';
+        // questionArea の直前に挿入（レイアウトに合わせて位置調整）
+        questionArea.parentNode.insertBefore(commonHint, questionArea);
+    }
+    // 現在のセットの hintText を表示
+    commonHint.textContent = questions[currentQuestionSet].hintText;
+    setTimeout(() => {
+        commonHint.style.opacity = '1';
+    }, 50);
+}
+
 
 // ヒントタイマーをクリアする関数
 function clearHintTimers() {
@@ -279,9 +317,15 @@ function startQuiz() {
 function loadQuestionSet(setIndex) {
     clearQuestionArea();
     answerInputs = [];
-    hintElements = []; // ヒント要素に questionImg を登録するよう変更
+    hintElements = []; // ヒント画像要素を格納
     answerButtons = [];
     transitionScreen.classList.add('hidden');
+
+    // 前のセットで作成された共通ヒントテキスト要素があれば削除
+    let commonHint = document.getElementById('common-hint-text');
+    if(commonHint) {
+        commonHint.remove();
+    }
     
     if (setIndex < questions.length) {
         const currentSet = questions[setIndex];
@@ -296,14 +340,13 @@ function loadQuestionSet(setIndex) {
             const questionDiv = document.createElement('div');
             questionDiv.classList.add('question');
     
-            // 画像要素を生成し、オリジナル画像とヒント画像のパスを dataset に保存
+            // 画像要素を生成し、オリジナル画像とヒント画像パスをデータ属性に保存
             const questionImg = document.createElement('img');
             questionImg.src = questionData.image;
             questionImg.alt = `問題${i + 1}`;
-            questionImg.dataset.original = questionData.image; // オリジナル画像
-            questionImg.dataset.hint = questionData.hint;         // ヒント用画像パス
+            questionImg.dataset.original = questionData.image;
+            questionImg.dataset.hint = questionData.hint;
             questionDiv.appendChild(questionImg);
-            // hintElements 配列に画像要素を登録（後でsrc切替に利用）
             hintElements.push(questionImg);
     
             // 解答入力欄生成
