@@ -7,13 +7,23 @@
     <title>RULE EXCLUDE</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <h1>RULE EXCLUDE</h1>
 
         <div id="start-screen">
-            <button id="start-button">ゲームスタート</button>
+            <div class="game-logo">RULE EXCLUDE</div>
+            <div class="rules-box">
+              <h3>ゲーム説明</h3>
+              <p>対応した法則(RULE)にしたがって、イラストや文字などが問題画像から消えている(EXCLUDE)</p>
+              <p>法則を表しているアルファベットは問題には関係しない</p>
+              <p>問題が各法則につき３問出題され、解答すると次の法則の問題セットが出される</p>
+              <p>内容を理解したら下のボタンを押してゲームを開始してください</p>
+            </div>
+            <button id="start-button" class="pulse-button">ゲームスタート</button>
         </div>
 
         <div id="quiz-screen" class="hidden">
@@ -30,13 +40,21 @@
         </div>
 
         <div id="clear-screen" class="hidden">
-            <h2>クリア！</h2>
-            <p id="clear-message">おめでとうございます！全問正解です！</p>
-            <p id="clear-time">クリアタイム  <span id="time-result"></p>
-            <button id="tweet-button">Xでシェア</button>
+            <div class="clear-content">
+              <h2 class="animate__animated animate__bounceIn">MISSION COMPLETE!</h2>
+              <div class="clear-image">
+                <img src="clear.jpg" alt="ゲームクリア" />
+              <div class="time-display">
+                <p id="clear-message">(これ以上の問題はございません)</p>
+                <p>TIME</p>
+                <div id="time-result" class="time-result"></div>
+              </div>
+              <button id="tweet-button">
+                <span class="icon">𝕏</span> でシェア
+              </button>
+            </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,125 +1,287 @@
-body {
-    font-family: sans-serif; /* フォントを sans-serif に変更 */
-    font-size: 1.2em; /* フォントサイズを 1.2em に変更 */
-    background-color: #382c5c;
-    color: #ecf0f1;
+/* 全体のフォントとスタイルの基本設定 */
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --highlight-color: #3498db;
+    --success-color: #2ecc71;
+    --text-color: #ecf0f1;
+    --background-color: #1a1a2e;
+  }
+  
+  body {
+    font-family: sans-serif;
+    font-size: 16px;
+    background-color: #2c3e50;
+    color: var(--text-color);
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-}
-
-.container {
-    background-color: rgba(44, 62, 80, 0.9);
+    overflow-x: hidden;
+  }
+  
+  .container {
+    background-color: rgba(26, 26, 46, 0.9);
     padding: 20px;
-    border-radius: 10px;
-    border: 3px solid #f50505;
-    box-shadow: 0 0 20px rgba(219, 80, 52, 0.5);
+    width: 95%;
+    max-width: 1000px;
+    height: auto;
+    border-radius: 15px;
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 30px rgba(231, 76, 60, 0.5), inset 0 0 20px rgba(231, 76, 60, 0.3);
     text-align: center;
-}
-
-h1 {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  h1 {
     margin-bottom: 20px;
-}
-
-.hidden {
+    font-size: 1.8rem;
+  }
+  
+  /* ゲーム開始画面のスタイル */
+  #start-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 15px;
+  }
+  
+  .game-logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color), 0 0 30px var(--accent-color);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    animation: glow 2s infinite alternate;
+  }
+  
+  /* ルール説明ボックスのスタイル */
+  .rules-box {
+    background-color: white;
+    color: #333;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    font-family: sans-serif;
+  }
+  
+  .rules-box h3 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+  }
+  
+  .rules-box p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+    }
+    to {
+      text-shadow: 0 0 15px var(--accent-color), 0 0 25px var(--accent-color), 0 0 35px var(--accent-color);
+    }
+  }
+  
+  .pulse-button {
+    position: relative;
+  }
+  
+  .pulse-button:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 20px var(--success-color);
+    animation: pulse 2s infinite;
+    z-index: -1;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+  }
+  
+  .hidden {
     display: none !important;
-}
-
-#timer {
+  }
+  
+  #timer {
     position: fixed;
     top: 10px;
     right: 10px;
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 5px 10px;
+    padding: 8px 12px;
     border-radius: 5px;
-    font-size: 0.8em;
+    font-size: 0.9rem;
     color: #ffffff;
-}
-
-#question-area {
+    z-index: 9; /* 他の要素より前面に表示 */
+  }
+  
+  #question-area {
     display: flex;
     flex-direction: column; /* 縦に並べる */
     gap: 15px; /* 質問の間隔 */
     margin-bottom: 20px;
-}
-
-.question {
+  }
+  
+  .question {
     padding: 15px;
     border: 2px solid #f50505;
     border-radius: 5px;
     text-align: left; /* テキストを左寄せ */
     background-color: rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
-}
-
-.question:hover {
+  }
+  
+  .question:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-}
-
-.question img {
+  }
+  
+  .question img {
     max-width: 100%; /* 画像が親要素からはみ出さないように */
     height: auto;
     display: block; /* インライン要素の回り込みを解消 */
     margin-bottom: 10px; /* 画像と入力欄の間隔 */
-}
-
-.answer-input {
+  }
+  
+  .answer-input {
     width: calc(100% - 20px); /* 左右のpaddingを考慮して幅を調整 */
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box; /* padding, border を含めて width, height に */
-}
-
-#answer-button,
-#start-button,
-#tweet-button {
-    padding: 15px 30px;
-    font-size: 1.2em;
+    font-size: 1.2rem; /* スマホ向けに調整 */
+  }
+  
+  #answer-button,
+  #start-button {
+    padding: 16px 30px;
+    font-size: 1.3rem;
     border: none;
-    border-radius: 5px;
-    background-color: #2ecc71;
+    border-radius: 8px;
+    background: linear-gradient(to bottom, #2ecc71, #27ae60);
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-#start-button:hover, #tweet-button:hover {
-    background-color: #27ae60;
-    transform: scale(1.1);
-}
-
-#clear-screen h2 {
-    color: green;
-}
-
-#clear-message {
-    margin-bottom: 20px;
-}
-
-.answer-button-single {
-    padding: 8px 15px;
-    font-size: 0.9em;
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    min-width: 200px;
+    margin: 10px 0;
+    -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを消す */
+  }
+  
+  #tweet-button {
+    padding: 16px 30px;
+    font-size: 1.3rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    background: linear-gradient(to bottom, #333333, #000000);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid #444;
+    min-width: 200px;
+    margin: 10px 0;
+    -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを消す */
+  }
+  
+  #start-button:hover {
+    background: linear-gradient(to bottom, #27ae60, #219653);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.6);
+  }
+  
+  #tweet-button:hover {
+    background: linear-gradient(to bottom, #000000, #222222);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    border: 1px solid #666;
+  }
+  
+  /* タッチデバイス用のアクティブ状態 */
+  #start-button:active,
+  #tweet-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  #clear-screen h2 {
+    color: #f1c40f;
+    font-size: 2rem;
+    text-shadow: 0 0 10px rgba(241, 196, 15, 0.7);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  
+  #clear-message {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+  
+  .answer-button-single {
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
     background-color: #e74c3c;
     color: white;
     cursor: pointer;
     margin-top: 10px; /* 入力欄との間隔 */
     transition: all 0.3s ease;
-}
-
-.answer-button-single:hover {
+    min-width: 120px;
+    -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを消す */
+  }
+  
+  .answer-button-single:active {
     background-color: #c0392b;
-    transform: scale(1.05);
-}
-
-/* transition-screen のスタイル */
-#transition-screen {
+    transform: translateY(2px);
+  }
+  
+  /* transition-screen のスタイル */
+  #transition-screen {
     position: fixed; /* 画面全体を覆うように固定 */
     top: 0;
     left: 0;
@@ -131,27 +293,220 @@ h1 {
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 1.2em;
+    font-size: 1.5rem; /* スマホ向けに調整 */
     padding: 20px;
     text-align: center;
     z-index: 10; /* 他の要素より前面に表示 */
-}
-
-#transition-message {
+    box-sizing: border-box;
+  }
+  
+  #transition-message {
     margin-bottom: 30px;
     white-space: pre-line;
-}
-
-#next-set-button {
-    padding: 10px 20px;
-    font-size: 1em;
+  }
+  
+  #next-set-button {
+    padding: 15px 25px;
+    font-size: 1.2rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #007bff;
     color: white;
     cursor: pointer;
-}
-
-#next-set-button:hover {
+    min-width: 150px;
+    -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを消す */
+  }
+  
+  #next-set-button:active {
     background-color: #0056b3;
-}
+    transform: translateY(2px);
+  }
+  
+  /* クリア画面のスタイル */
+  .clear-content {
+    position: relative;
+    z-index: 2;
+    padding: 10px;
+  }
+  
+  /* クリア画面の追加スタイル */
+  .clear-image {
+    margin: 15px auto;
+    max-width: 100%;
+  }
+  
+  .clear-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  #clear-message {
+    font-size: 1.2rem;
+    margin: 15px 0;
+    color: #2ecc71;
+  }
+  
+  .time-display {
+    background: rgba(52, 73, 94, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px auto;
+    max-width: 250px;
+    border: 2px solid #3498db;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+  }
+  
+  .time-display p {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    color: #3498db;
+  }
+  
+  .time-result {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ecf0f1;
+  }
+  
+  #tweet-button .icon {
+    font-weight: bold;
+  }
+  
+  /* スマホ向け最適化 */
+  @media only screen and (max-width: 600px) {
+    body {
+      font-size: 16px;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .container {
+      width: 95%;
+      padding: 15px;
+      border-width: 2px;
+    }
+  
+    h1 {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+  
+    .game-logo {
+      font-size: 2rem;
+    }
+  
+    .rules-box {
+      padding: 12px 15px;
+      margin-bottom: 25px;
+    }
+  
+    .rules-box h3 {
+      font-size: 1.1rem;
+      padding-bottom: 6px;
+    }
+  
+    .rules-box p {
+      font-size: 0.9rem;
+      margin: 6px 0;
+    }
+  
+    #start-button,
+    #tweet-button {
+      font-size: 1.1rem;
+      padding: 14px 20px;
+      min-width: 180px;
+    }
+  
+    #clear-screen h2 {
+      font-size: 1.8rem;
+    }
+  
+    .clear-image {
+      margin: 10px auto;
+    }
+  
+    .time-result {
+      font-size: 1.8rem;
+    }
+  
+    .time-display {
+      padding: 12px;
+      max-width: 220px;
+    }
+  
+    #timer {
+      top: 5px;
+      right: 5px;
+      padding: 5px 8px;
+      font-size: 0.8rem;
+    }
+  
+    .answer-input {
+      font-size: 1rem;
+      padding: 10px;
+    }
+  
+    .answer-button-single {
+      font-size: 1rem;
+      padding: 10px 15px;
+    }
+  
+    #transition-screen {
+      font-size: 1.2rem;
+      padding: 15px;
+    }
+  
+    #next-set-button {
+      font-size: 1rem;
+      padding: 12px 20px;
+    }
+  
+    /* タッチ操作のためのターゲット領域を拡大 */
+    button {
+      min-height: 44px; /* Apple推奨のタッチターゲットサイズ */
+    }
+  }
+  
+  /* さらに小さい画面向け */
+  @media only screen and (max-width: 320px) {
+    .game-logo {
+      font-size: 1.7rem;
+    }
+  
+    .rules-box {
+      padding: 10px;
+    }
+  
+    .rules-box h3 {
+      font-size: 1rem;
+    }
+  
+    .rules-box p {
+      font-size: 0.8rem;
+      margin: 5px 0;
+    }
+  
+    #start-button,
+    #tweet-button {
+      font-size: 1rem;
+      padding: 12px 15px;
+      min-width: 160px;
+    }
+  
+    #clear-screen h2 {
+      font-size: 1.5rem;
+    }
+  
+    .time-display {
+      padding: 10px;
+      max-width: 200px;
+    }
+  
+    .time-result {
+      font-size: 1.5rem;
+    }
+  }
+  
