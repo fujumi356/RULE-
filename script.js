@@ -139,7 +139,7 @@ const questions = [
             { image: 'h2.JPG', answer: ['いわて','岩手','岩手県','いわてけん'], hint: 'h2hint.JPG' },
             { image: 'h3.JPG', answer: ['しわ'], hint: 'h3hint.JPG' }
         ],
-        transitionMessage: "追加のルール用紙を見てルールを確認してください \n 確認できれば下のボタンをおしてください",
+        transitionMessage: "追加のルール用紙を見て\nルールを確認してください \n 確認できれば下のボタンを\n押してください",
         isLastSet: false
     },
     {
@@ -169,11 +169,27 @@ let hintTimers = []; // ヒントタイマーを配列で管理
 
 // タイマー開始 (カウントアップ)
 function startTimer() {
-    elapsedTime = 0; // 経過時間初期化
+    // quizStartTime と quizElapsedTime をローカルストレージから取得
+    const storedStartTime = localStorage.getItem("quizStartTime");
+    const storedElapsedTime = localStorage.getItem("quizElapsedTime");
+
+    if (storedStartTime && storedElapsedTime) {
+        const timeDifference = Math.floor((Date.now() - Number(storedStartTime)) / 1000);
+        elapsedTime = Number(storedElapsedTime) + timeDifference;
+    } else {
+        elapsedTime = 0;
+        localStorage.setItem("quizStartTime", Date.now());
+        localStorage.setItem("quizElapsedTime", elapsedTime);
+    }
+
+    timerDisplay.style.position = 'relative';
+    timerDisplay.style.zIndex = '100';
     timerDisplay.textContent = formatTime(elapsedTime);
+
     timer = setInterval(() => {
         elapsedTime++;
         timerDisplay.textContent = formatTime(elapsedTime);
+        localStorage.setItem("quizElapsedTime", elapsedTime); // 経過時間を保存
     }, 1000);
 }
 
@@ -254,6 +270,7 @@ function startQuiz() {
     clearScreen.classList.add('hidden'); // 念のため非表示
     currentQuestionSet = 0; // 問題セットをリセット
     loadQuestionSet(currentQuestionSet);
+    localStorage.setItem("quizStartTime", Date.now()); // 追加: クイズ開始時刻を保存
     startTimer();
     startHintTimers(); // ヒントタイマー開始
 }
@@ -399,23 +416,29 @@ function checkAllAnswers() {
     }
 }
 
-// クリア画面表示
+// 追加: タイマーのキャッシュを削除するヘルパー関数
+function clearTimerCache() {
+    localStorage.removeItem("quizStartTime");
+}
+
+// 変更: クリア画面表示時にタイマーキャッシュを削除するようにする
 function showClearScreen() {
     quizScreen.classList.add('hidden');
     transitionScreen.classList.add('hidden'); // ★ transitionScreen を非表示
     clearScreen.classList.remove('hidden');
     clearTimeDisplay.textContent = formatTime(elapsedTime); // クリアタイムを表示
+    clearTimerCache(); // タイマーのキャッシュを削除
 }
 
-// スタート画面表示 (リトライ時など)
+// スタート画面表示（リトライ時など）時にも開始時刻を削除
 function showStartScreen() {
     quizScreen.classList.add('hidden');
     transitionScreen.classList.add('hidden'); // ★ transitionScreen を非表示
     clearScreen.classList.add('hidden');
     startScreen.classList.remove('hidden');
     timerDisplay.textContent = '0'; // タイマー表示をリセット (0秒)
+    clearTimerCache(); // 追加: タイマーのキャッシュを削除
 }
-
 
 // X (旧Twitter) シェア機能
 tweetButton.addEventListener('click', () => {
