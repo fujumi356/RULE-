@@ -63,8 +63,8 @@ function normalizeAnswer(answer) {
 
 
 // デフォルトのヒント表示までの時間 (秒)
-const timeForHint1 = 2; 
-const timeForHint2 = 5;//最初からの時間（ヒント１からではない）
+const timeForHint1 = 300; 
+const timeForHint2 = 560;//最初からの時間（ヒント１からではない）
 
 // 問題データ (画像ファイル名と答えとヒント)
 const questions = [
@@ -75,7 +75,6 @@ const questions = [
             { image: 'a2.JPG', answer: ['きーぱー'], hint: 'a2hint.JPG', hint2: 'unused' },
             { image: 'a3.JPG', answer: ['しげん','資源'], hint: 'a3hint.JPG', hint2: 'unused' }
         ],
-        hintDelay: 3,
         // セット共通の第2段階ヒントテキストを追加
         hintText: "Ａの法則：丸い形のもの",
         isLastSet: false
@@ -160,6 +159,7 @@ const questions = [
             { image: 'm4.JPG', answer: ['all','おーる'], hint: 'm4hint.JPG', hint2: 'm4hint4.JPG' }
         ],
         hintDelay: 420,
+        hintDelay2: 600,
         isLastSet: false
     },
     {
