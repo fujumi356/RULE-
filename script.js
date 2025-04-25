@@ -485,7 +485,7 @@ function showStartScreen() {
 
 // X (旧Twitter) シェア機能
 tweetButton.addEventListener('click', () => {
-    const tweetText = encodeURIComponent(`「RULE EXCLUDE」をクリアしました！ タイムは ${formatTime(elapsedTime)} 秒でした！`); // シェアするテキストにタイムを追加
+    const tweetText = encodeURIComponent(`「RULE EXCLUDE」をクリアしました！ タイムは ${formatTime(elapsedTime)} でした！`); // シェアするテキストにタイムを追加
     const tweetUrl = `https://twitter.com/intent/tweet?text=${tweetText}`;
     window.open(tweetUrl, '_blank');
 });
