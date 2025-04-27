@@ -19,6 +19,9 @@ let answeredQuestions; // 解答済みフラグを配列で管理
 let answerInputs = []; // 動的に生成される answer-input を格納する配列
 let hintElements = []; // 動的に生成される hint を格納する配列
 let answerButtons = []; // 動的に生成される answer-button を格納する配列
+let setStartTime;      // セット開始時刻（ミリ秒）
+let setTimer;          // セットタイマーのインターバルID
+const setTimerDisplay = document.getElementById('set-time'); // セット用タイマー表示
 
 // ★ 正規化のためのマッピングデータ (必要に応じて拡張)
 const zenkakuKatakana = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン゛゜ァィゥｪォッャュョヮヰヱヲ"; // ｪ は変換困難なためそのまま
@@ -63,8 +66,8 @@ function normalizeAnswer(answer) {
 
 
 // デフォルトのヒント表示までの時間 (秒)
-const timeForHint1 = 300; 
-const timeForHint2 = 560;//最初からの時間（ヒント１からではない）
+const timeForHint1 = 360; 
+const timeForHint2 = 420;//最初からの時間（ヒント１からではない）
 
 // 問題データ (画像ファイル名と答えとヒント)
 const questions = [
@@ -72,8 +75,8 @@ const questions = [
         count: 3, // Ａ
         data: [
             { image: 'a1.JPG', answer: ['おんせん','温泉'], hint: 'a1hint.JPG', hint2: 'unused' },
-            { image: 'a2.JPG', answer: ['きーぱー'], hint: 'a2hint.JPG', hint2: 'unused' },
-            { image: 'a3.JPG', answer: ['しげん','資源'], hint: 'a3hint.JPG', hint2: 'unused' }
+            { image: 'a2.JPG', answer: ['きーぱー'], hint: 'a2hint.JPG', hint2: 'm1hint.JPG' },
+            { image: 'a3.JPG', answer: ['しげん','資源'], hint: 'a3hint.JPG', hint2: 'a3hint.JPG' }
         ],
         // セット共通の第2段階ヒントテキストを追加
         hintText: "Ａの法則：丸い形のもの",
@@ -267,9 +270,11 @@ function startHintTimers() {
     if (currentSet.hintText) {
         hintTimers.push(setTimeout(showCommonHintText, delay2));
     } else {
-        // 定義がなければ、従来通り各問題ごとの second ヒント処理（必要に応じて）
+        // ★個別にhint2を出す
         for (let i = 0; i < getCurrentQuestionCount(); i++) {
-            hintTimers.push(setTimeout(() => showHintWithAnimation(hintElements[i], 'second'), delay2));
+            hintTimers.push(setTimeout(() => {
+                showHintWithAnimation(hintElements[i], 'second');
+            }, delay2));
         }
     }
 }
@@ -315,6 +320,10 @@ function startQuiz() {
 
 // 問題セットをロード
 function loadQuestionSet(setIndex) {
+    clearSetTimer();           // ★前のセットタイマーを止める
+    setStartTime = Date.now(); // ★新しいセット開始時刻を記録
+    startSetTimer();           // ★セットタイマー開始
+
     clearQuestionArea();
     answerInputs = [];
     hintElements = []; // ヒント画像要素を格納
@@ -346,6 +355,7 @@ function loadQuestionSet(setIndex) {
             questionImg.alt = `問題${i + 1}`;
             questionImg.dataset.original = questionData.image;
             questionImg.dataset.hint = questionData.hint;
+            questionImg.dataset.hint2 = questionData.hint2; // ←これが必須！
             questionDiv.appendChild(questionImg);
             hintElements.push(questionImg);
     
@@ -379,6 +389,19 @@ function loadQuestionSet(setIndex) {
         showClearScreen();
     }
 }
+
+function startSetTimer() {
+    setTimerDisplay.textContent = "00:00";
+    setTimer = setInterval(() => {
+        const elapsedSetSeconds = Math.floor((Date.now() - setStartTime) / 1000);
+        setTimerDisplay.textContent = formatTime(elapsedSetSeconds);
+    }, 1000);
+}
+
+function clearSetTimer() {
+    if (setTimer) clearInterval(setTimer);
+}
+
 
 // 問題セット間のトランジション画面を表示する関数
 function showTransitionScreen(message) {
@@ -471,6 +494,7 @@ function showClearScreen() {
     clearScreen.classList.remove('hidden');
     clearTimeDisplay.textContent = formatTime(elapsedTime); // クリアタイムを表示
     clearTimerCache(); // タイマーのキャッシュを削除
+    clearSetTimer(); // ★セットタイマーも止める
 }
 
 // スタート画面表示（リトライ時など）時にも開始時刻を削除

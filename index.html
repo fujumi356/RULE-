@@ -27,7 +27,11 @@
         </div>
 
         <div id="quiz-screen" class="hidden">
-            <div id="timer">経過時間   <span id="time">00:00</div>
+            <div id="timer">
+              総経過時間 <span id="time">00:00</span><br>
+              セット経過時間 <span id="set-time">00:00</span> <!-- ★追加！ -->
+            </div>
+              
             <div id="question-area">
                 <!-- 問題はJavaScriptで動的に生成されるため、ここでは空 -->
             </div>
@@ -41,17 +45,18 @@
 
         <div id="clear-screen" class="hidden">
             <div class="clear-content">
-              <h2 class="animate__animated animate__bounceIn">MISSION COMPLETE!</h2>
-              <div class="clear-image">
-                <img src="clear.jpg" alt="ゲームクリア" />
-              <div class="time-display">
+                <h2 class="animate__animated animate__bounceIn">MISSION COMPLETE!</h2>
+                <div class="clear-image">
+                    <img src="clear.jpg" alt="ゲームクリア" />
+                </div>
                 <p id="clear-message">(これ以上の問題はございません)</p>
-                <p>TIME</p>
-                <div id="time-result" class="time-result"></div>
-              </div>
-              <button id="tweet-button">
-                <span class="icon">𝕏</span> でシェア
-              </button>
+                <div class="time-display">
+                    <p>TIME</p>
+                    <div id="time-result" class="time-result"></div>
+                </div>
+                <button id="tweet-button">
+                    <span class="icon">𝕏</span> でシェア
+                </button>
             </div>
         </div>
     </div>
