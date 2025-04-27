@@ -469,7 +469,7 @@ function checkAllAnswers() {
             clearHintTimers();
         } else if (questions[currentQuestionSet].transitionMessage) {  // transitionMessageがあれば
             showTransitionScreen(questions[currentQuestionSet].transitionMessage);
-            clearInterval(timer);
+            // clearInterval(timer); // タイマーを止めないようにする
             clearHintTimers();
         } else {
             setTimeout(() => {
